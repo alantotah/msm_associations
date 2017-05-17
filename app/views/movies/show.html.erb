@@ -21,20 +21,22 @@
       <dd><%= @movie.image_url %></dd>
 
       <dt>Director</dt>
-      <dd><%= Director.find_by(:id => @movie.director_id).name %></dd>
+      <dd>
+        <a href="/directors/<%= @movie.director_id %>">
+          <%= Director.find_by(:id => @movie.director_id).name %></dd>
+        </a>
+        </dl>
 
-    </dl>
-
-    <div class="btn-group btn-group-justified">
-      <a href="/movies" class="btn btn-primary">
-        Back
-      </a>
-      <a href="/movies/<%= @movie.id %>/edit" class="btn btn-warning">
-        Edit
-      </a>
-      <a href="/delete_movie/<%= @movie.id %>" class="btn btn-danger" rel="nofollow">
-        Delete
-      </a>
+        <div class="btn-group btn-group-justified">
+          <a href="/movies" class="btn btn-primary">
+            Back
+          </a>
+          <a href="/movies/<%= @movie.id %>/edit" class="btn btn-warning">
+            Edit
+          </a>
+          <a href="/delete_movie/<%= @movie.id %>" class="btn btn-danger" rel="nofollow">
+            Delete
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
