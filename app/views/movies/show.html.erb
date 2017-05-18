@@ -25,18 +25,80 @@
         <a href="/directors/<%= @movie.director_id %>">
           <%= Director.find_by(:id => @movie.director_id).name %></dd>
         </a>
-        </dl>
 
-        <div class="btn-group btn-group-justified">
-          <a href="/movies" class="btn btn-primary">
-            Back
-          </a>
-          <a href="/movies/<%= @movie.id %>/edit" class="btn btn-warning">
-            Edit
-          </a>
-          <a href="/delete_movie/<%= @movie.id %>" class="btn btn-danger" rel="nofollow">
-            Delete
-          </a>
-        </div>
+        <!-- <dt>Number Characters</dt>
+        <dd><%= Character.where(movie_id: @movie.id).count %></dd> -->
+
+        <dt>Number of Characters</dt>
+        <dd><%= @movie.characters.count %></dd>
+
+      </dl>
+
+      <div class="btn-group btn-group-justified">
+        <a href="/movies" class="btn btn-primary">
+          Back
+        </a>
+        <a href="/movies/<%= @movie.id %>/edit" class="btn btn-warning">
+          Edit
+        </a>
+        <a href="/delete_movie/<%= @movie.id %>" class="btn btn-danger" rel="nofollow">
+          Delete
+        </a>
       </div>
     </div>
+  </div>
+
+  <ul>
+    <% @movie.characters.each do |character| %>
+    <li><%= character.actor.name %>
+      (<%= character.name %>)
+    </li>
+    <% end %>
+  </ul>
+
+
+
+  <!-- <% movies = Movie.all %>
+  <% movies.each do |movie| %>
+  <% characters = Character.where(movie_id: movie.id)%>
+  <% characters.each do |character| %>
+  <% actor = Actor.find_by(id: character.actor_id) %>
+  <%= actor.name %>
+  <% end %>
+  <% end %> -->
+
+  <form action="/create_character" method="post">
+    <!-- Hidden input for authenticity token to protect from forgery -->
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+    <!-- Label and input for movie_id -->
+    <div class="form-group">
+
+  <input type="hidden" name="movie_id" value="<%= @movie.id %>">
+
+    <!-- Label and input for actor_id -->
+    <div class="form-group">
+      <label for="actor_id" class="control-label">
+        Actor
+      </label>
+
+      <%= select_tag("actor_id", options_from_collection_for_select(Actor.all, :id, :name, @character.actor_id), :class => "form-control") %>
+
+    </div>
+
+    <!-- Label and input for name -->
+    <div class="form-group">
+      <label for="name" class="control-label">
+        Name
+      </label>
+
+      <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @character.name %>">
+    </div>
+
+
+    <button class="btn btn-success">
+      Create Character
+    </button>
+    or
+    <a href="/characters">Cancel</a>
+  </form>

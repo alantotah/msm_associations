@@ -5,16 +5,30 @@
 <div class="row">
   <div class="col-md-12 mb-2">
     <dl class="dl-horizontal">
-      <dt>Movie</dt>
+      <!-- <dt>Movie</dt>
       <dd>
       <%= Movie.find_by(:id => @character.movie_id).title%>
+      </dd> -->
+
+      <dt>Movie</dt>
+      <dd>
+      <%= @character.movies.title%>
       </dd>
-      <dt>Actor</dt>
+
+      <!-- <dt>Actor</dt>
       <dd>
       <%= Actor.find_by(:id => @character.actor_id).name%>
+      </dd> -->
+
+      <dt>Actor</dt>
+      <dd>
+      <%= @character.actor.name%>
       </dd>
+
       <dt>Name</dt>
-      <dd><%= @character.name %></dd>
+      <dd>
+        <%= @character.name %>
+      </dd>
 
     </dl>
 
