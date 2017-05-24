@@ -21,7 +21,7 @@
       <dd><%= Character.where(actor_id: @actor.id).count %></dd> -->
 
       <dt>Number of Movies</dt>
-      <dd><%= @actor.actors.count %></dd>
+      <dd><%= @actor.characters.count %></dd>
 
     </dl>
 
@@ -40,8 +40,8 @@
 </div>
 
 <ul>
-<% @actor.actors.each do |movie| %>
-<li><a href="/movies/<%= movie.movies.id %>"><%= movie.movies.title %></a></li>
+<% @actor.characters.each do |movie| %>
+<li><a href="/movies/<%= movie.movie.id %>"><%= movie.movie.title %></a></li>
 <% end %>
 </ul>
 
